@@ -9,6 +9,7 @@ const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [searchHistory, setSearchHistory] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     const history = localStorage.getItem("searchHistory");
@@ -18,33 +19,33 @@ const SearchPage = () => {
   }, []);
 
   const handleSearch = async (e) => {
-    e.preventDefault(); // Empêche le comportement par défaut de soumission du formulaire
-
-    // Effectuez l'appel API pour récupérer les informations météorologiques de la ville recherchée
-    // Utilisez la même logique d'appel API que dans le composant App
+    e.preventDefault();
+    setIsSearching(true);
 
     try {
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${searchTerm}&appid=${apiKey}&units=metric`
       );
-      const weatherData = {
-        name: response.data.name,
-        zipCode: "Code postal non disponible",
-        temperature: response.data.main.temp,
-        maxTemperature: response.data.main.temp_max,
-        minTemperature: response.data.main.temp_min,
-        windSpeed: response.data.wind.speed,
-      };
 
-      setSearchResults([weatherData]);
-
-      // Ajouter la ville à l'historique
-      addToHistory(searchTerm);
+      if (response.data.cod === "404") {
+        setSearchResults([]);
+      } else {
+        const weatherData = {
+          name: response.data.name,
+          zipCode: "Code postal non disponible",
+          temperature: response.data.main.temp,
+          maxTemperature: response.data.main.temp_max,
+          minTemperature: response.data.main.temp_min,
+          windSpeed: response.data.wind.speed,
+        };
+        setSearchResults([weatherData]);
+        addToHistory(searchTerm);
+      }
     } catch (error) {
-      console.error(
-        "Erreur lors de la récupération des données météorologiques :",
-        error
-      );
+      console.error("Erreur lors de la récupération des données météorologiques :", error);
+      setSearchResults([]);
+    } finally {
+      setIsSearching(false);
     }
   };
 
@@ -79,7 +80,15 @@ const SearchPage = () => {
             <WeatherCard key={index} city={result} />
           ))}
         </div>
-      ) : null}
+      ) : isSearching ? (
+        <div className="search-results">
+          <h2>Recherche en cours...</h2>
+        </div>
+      ) : (
+        <div className="search-results">
+          <h2>Aucune ville trouvée</h2>
+        </div>
+      )}
     </div>
   );
 };
