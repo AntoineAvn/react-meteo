@@ -2,7 +2,7 @@ import React from 'react';
 
 const NotFound = () => {
   return (
-    <div className="not-found">
+    <div className="not-found text-center mt-5">
       <h1>404 : Page non trouvée</h1>
       <p>La page que vous recherchez n'existe pas.</p>
     </div>
