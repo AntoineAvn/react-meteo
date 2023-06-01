@@ -80,11 +80,7 @@ const SearchPage = () => {
             <WeatherCard key={index} city={result} />
           ))}
         </div>
-      ) : isSearching ? (
-        <div className="search-results">
-          <h2>Recherche en cours...</h2>
-        </div>
-      ) : (
+      ) : isSearching ? null : (
         <div className="search-results">
           <h2>Aucune ville trouvée</h2>
         </div>
