@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import WeatherCard from "../WeatherCard/WeatherCard";
+import "./SearchPage.css";
 
 const apiKey = "baacc5d96dbbffaa9386b21746d7a94b";
 
@@ -16,7 +17,9 @@ const SearchPage = () => {
     }
   }, []);
 
-  const handleSearch = async () => {
+  const handleSearch = async (e) => {
+    e.preventDefault(); // Empêche le comportement par défaut de soumission du formulaire
+
     // Effectuez l'appel API pour récupérer les informations météorologiques de la ville recherchée
     // Utilisez la même logique d'appel API que dans le composant App
 
@@ -54,7 +57,7 @@ const SearchPage = () => {
   return (
     <div className="search-page container">
       <h1 className="text-center">Recherche de Ville</h1>
-      <div className="input-group mb-3">
+      <form className="input-group mb-3" onSubmit={handleSearch}>
         <input
           type="text"
           className="form-control"
@@ -63,15 +66,11 @@ const SearchPage = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <div className="input-group-append">
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={handleSearch}
-          >
+          <button className="btn btn-primary" type="submit">
             Rechercher
           </button>
         </div>
-      </div>
+      </form>
 
       {searchResults.length > 0 ? (
         <div className="search-results">

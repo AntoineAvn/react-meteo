@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Import components
-import App from "./components/App.jsx";
+import App from "./components/Home/Home.jsx";
 import SearchPage from "./components/Search/SearchPage.jsx";
 import HistoriquePage from "./components/History/HistoryPage.jsx";
 import NavBar from "./components/NavBar/NavBar.jsx";

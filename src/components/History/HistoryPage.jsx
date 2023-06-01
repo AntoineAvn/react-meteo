@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './HistoryPage.css';
 
 const HistoriquePage = () => {
   const [searchHistory, setSearchHistory] = useState([]);
@@ -10,15 +11,23 @@ const HistoriquePage = () => {
     }
   }, []);
 
+  const clearHistory = () => {
+    setSearchHistory([]);
+    localStorage.removeItem('searchHistory');
+  };
+
   return (
     <div className="historique-page container">
       <h1 className="text-center">Historique des Recherches</h1>
       {searchHistory.length > 0 ? (
-        <ul>
-          {searchHistory.map((city, index) => (
-            <li key={index}>{city}</li>
-          ))}
-        </ul>
+        <div>
+          <button onClick={clearHistory} className='btn btn-danger mt-4'>Effacer l'historique</button>
+          <ul>
+            {searchHistory.map((city, index) => (
+              <li key={index}>{city}</li>
+            ))}
+          </ul>
+        </div>
       ) : (
         <p>Aucune recherche effectuée.</p>
       )}

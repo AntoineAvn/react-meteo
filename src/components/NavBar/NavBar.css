@@ -1,5 +1,4 @@
 .banniere {
-    /* background-color: #242424; */
     padding: 3px;
     color: #14455b;
     border-bottom: solid 1px #538397;
@@ -8,6 +7,7 @@
     justify-content: space-between;
     padding-left: 50px;
     padding-right: 50px;
+    margin-bottom: 20px;
 }
 
 .banniere div{

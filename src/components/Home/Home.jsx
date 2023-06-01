@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import WeatherCard from "./WeatherCard/WeatherCard";
+import WeatherCard from "../WeatherCard/WeatherCard";
+import "./Home.css";
 
-const App = () => {
+const Home = () => {
   const [cities, setCities] = useState([]);
 
   useEffect(() => {
@@ -48,7 +49,6 @@ const App = () => {
 
   return (
     <div className="app container">
-      <h1 className="text-center">Application Météo</h1>
       <div className="row">
         {cities.map((city, index) => (
           <div className="col-md-4" key={index}>
@@ -60,4 +60,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Home;
