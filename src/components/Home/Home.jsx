@@ -16,7 +16,7 @@ const Home = () => {
         { name: "Sydney", zipCode: "2000" },
       ];
 
-      const apiKey = "baacc5d96dbbffaa9386b21746d7a94b";
+      const apiKey = import.meta.env.VITE_API_KEY;
 
       const requests = cityData.map((city) =>
         axios.get(

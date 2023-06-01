@@ -3,7 +3,7 @@ import axios from "axios";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import "./SearchPage.css";
 
-const apiKey = "baacc5d96dbbffaa9386b21746d7a94b";
+const apiKey = import.meta.env.VITE_API_KEY;
 
 const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
